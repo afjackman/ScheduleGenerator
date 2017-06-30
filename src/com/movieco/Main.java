@@ -22,10 +22,7 @@ public class Main {
         for (String row : rows) {
             movies.add(new Movie(row));
         }
-        for (Movie movie : movies) {
-            System.out.println(movie.toString());
-        }
-        System.out.println(properlyFormattedDate());
+        System.out.println("\n" + properlyFormattedDate() + "\n");
     }
 
     public static String properlyFormattedDate() {
