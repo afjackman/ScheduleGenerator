@@ -3,6 +3,8 @@ package com.movieco;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +25,13 @@ public class Main {
         for (Movie movie : movies) {
             System.out.println(movie.toString());
         }
+        System.out.println(properlyFormattedDate());
+    }
+
+    public static String properlyFormattedDate() {
+        LocalDate localDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE M/d/yyyy");
+        return localDate.format(formatter);
     }
 
 
