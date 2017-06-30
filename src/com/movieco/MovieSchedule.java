@@ -1,5 +1,7 @@
 package com.movieco;
 
+import java.util.List;
+
 /**
  * Represents the schedule created for a particular movie at a particular theater on a particular day.
  * Created by adamjackman on 6/30/17.
@@ -7,18 +9,21 @@ package com.movieco;
 public class MovieSchedule {
 
     private Movie movie;
-    private DailyHours todaysHours;
+    private List<Showtime> showtimes;
 
-    public MovieSchedule(Movie movie, DailyHours todaysHours) {
+    public MovieSchedule(Movie movie, List<Showtime> showtimes) {
         this.movie = movie;
-        this.todaysHours = todaysHours;
-        // TODO The algorithm
+        this.showtimes = showtimes;
     }
 
-    // TODO This method
-    // Prints the movie and the times that the movie will play
     public String toString() {
-        return "  First Result";
+        StringBuilder sb = new StringBuilder();
+        for (Showtime showtime : showtimes) {
+            sb.append("  ");
+            sb.append(showtime.toString());
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 
     public Movie getMovie() {
@@ -29,11 +34,11 @@ public class MovieSchedule {
         this.movie = movie;
     }
 
-    public DailyHours getTodaysHours() {
-        return todaysHours;
+    public void addShowTime(Showtime showtime) {
+        showtimes.add(showtime);
     }
 
-    public void setTodaysHours(DailyHours todaysHours) {
-        this.todaysHours = todaysHours;
+    public void removeShowTime(Showtime showtime) {
+        showtimes.remove(showtime);
     }
 }
