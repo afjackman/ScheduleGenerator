@@ -27,7 +27,7 @@ public class Movie {
     }
 
     public String toString() {
-        return title + ", " + year + ", " + rating + ", " + runTime;
+        return title + " - Rated " + rating + ", " + runTime;
     }
 
     public String getTitle() {
