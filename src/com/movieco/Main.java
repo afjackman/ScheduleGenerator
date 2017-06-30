@@ -11,11 +11,6 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        /*System.out.println("Hello!");
-        Scanner reader = new Scanner(System.in);
-        System.out.println("Enter a number: ");
-        int n = reader.nextInt();
-        System.out.println(n+1);*/
         String inputFileName = "input.txt";
         List<String> rows = readInRows(inputFileName, false);
         List<Movie> movies = new ArrayList<>(rows.size());
@@ -23,6 +18,9 @@ public class Main {
             movies.add(new Movie(row));
         }
         System.out.println("\n" + properlyFormattedDate() + "\n");
+        TheaterHours theaterHours = new TheaterHours(); // TODO: Modify this using variable schedule.txt input
+        TheaterSchedule theaterSchedule = new TheaterSchedule(movies, theaterHours, dayOfWeek());
+        System.out.println(theaterSchedule.toString());
     }
 
     public static String properlyFormattedDate() {
@@ -31,6 +29,9 @@ public class Main {
         return localDate.format(formatter);
     }
 
+    public static int dayOfWeek() {
+        return LocalDate.now().getDayOfWeek().getValue();
+    }
 
     public static List<String> readInRows(String inputFileName, boolean includeFirstLine) {
         List<String> rows = new ArrayList<String>();
