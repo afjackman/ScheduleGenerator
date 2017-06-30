@@ -8,32 +8,30 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+// Alright what are the objects here
+// Algorithm input: Movies (name, length), Business Hours
+// -> Pulls out an object representing today's theater hours (start time, end time)
+// Theater object contains: BusinessHours, MovieList, Theather.generateSchedule(today) returns a DaySchedule containing multiple MovieSchedule objects
+// MovieSchedule object contains the Movie, a list of Times
+
 public class Main {
 
     public static void main(String[] args) {
         String inputFileName = takeInInputFileName();
         List<Movie> movies = readFileIntoMoviesList(inputFileName);
-        TheaterHours theaterHours = readInTheaterHours();
-        printDate();
-        int dayOfWeek = dayOfWeek();
-        TheaterSchedule theaterSchedule = createTheaterSchedule(movies, theaterHours, dayOfWeek);
+        BusinessHours theaterHours = readInBusinessHours();
+        Theater theater = new Theater(movies, theaterHours);
+        TheaterSchedule theaterSchedule = theater.generateTodaysSchedule(); // This is the algorithm
         printSchedule(theaterSchedule);
     }
 
     private static void printSchedule(TheaterSchedule theaterSchedule) {
+        System.out.println("\n" + properlyFormattedDate() + "\n");
         System.out.println(theaterSchedule.toString());
     }
 
-    private static TheaterSchedule createTheaterSchedule(List<Movie> movies, TheaterHours theaterHours, int dayOfWeek) {
-        return new TheaterSchedule(movies, theaterHours, dayOfWeek);
-    }
-
-    private static void printDate() {
-        System.out.println("\n" + properlyFormattedDate() + "\n");
-    }
-
-    private static TheaterHours readInTheaterHours() {
-        return new TheaterHours(); // TODO: Modify this using variable schedule.txt input
+    private static BusinessHours readInBusinessHours() {
+        return new BusinessHours(); // TODO: Modify this using variable schedule.txt input
     }
 
     private static List<Movie> readFileIntoMoviesList(String inputFileName) {
@@ -53,10 +51,6 @@ public class Main {
         LocalDate localDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE M/d/yyyy");
         return localDate.format(formatter);
-    }
-
-    public static int dayOfWeek() {
-        return LocalDate.now().getDayOfWeek().getValue();
     }
 
     public static List<String> readInRows(String inputFileName, boolean includeFirstLine) {

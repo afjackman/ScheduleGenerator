@@ -4,14 +4,14 @@ package com.movieco;
  * Represents business hours for a single day.
  * Created by adamjackman on 6/30/17.
  */
-public class DailyHours {
+public class SingleDayBusinessHours {
 
     private int startHour;
     private int startMin;
     private int endHour;
     private int endMin;
 
-    public DailyHours(int startHour, int startMin, int endHour, int endMin) {
+    public SingleDayBusinessHours(int startHour, int startMin, int endHour, int endMin) {
         this.startHour = startHour;
         this.startMin = startMin;
         this.endHour = endHour;

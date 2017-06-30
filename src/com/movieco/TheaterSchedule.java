@@ -1,5 +1,6 @@
 package com.movieco;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,9 +12,9 @@ public class TheaterSchedule {
 
     List<MovieSchedule> movieSchedules;
 
-    public TheaterSchedule(List<Movie> movieList, TheaterHours theaterHours, int dayOfWeek) {
+    public TheaterSchedule(List<Movie> movieList, BusinessHours theaterHours, int dayOfWeek) {
         movieSchedules = new ArrayList<>(movieList.size());
-        DailyHours todaysHours = theaterHours.getDailyHours(dayOfWeek);
+        SingleDayBusinessHours todaysHours = theaterHours.getDailyHours(dayOfWeek);
         for (Movie movie : movieList) {
             movieSchedules.add(new MovieSchedule(movie, todaysHours));
         }
