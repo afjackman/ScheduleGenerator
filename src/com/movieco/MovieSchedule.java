@@ -17,6 +17,7 @@ public class MovieSchedule {
 
         // Create the list of showtimes
         showtimes = new ArrayList<>();
+        this.movie = movie;
         int runtime = movie.getRunTimeMinutes();
 
         // Populate the list of showtimes by creating a back-to-back list of movies front-loaded in the time window
