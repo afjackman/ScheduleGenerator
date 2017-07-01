@@ -58,6 +58,14 @@ public class Movie {
         return runTime;
     }
 
+    public int getRunTimeMinutes() {
+        String[] hourMin = runTime.split(":");
+        int hour = Integer.parseInt(hourMin[0]);
+        int mins = Integer.parseInt(hourMin[1]);
+        int hoursInMins = hour * 60;
+        return hoursInMins + mins;
+    }
+
     public void setRunTime(String runTime) {
         this.runTime = runTime;
     }

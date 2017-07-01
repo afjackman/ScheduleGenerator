@@ -8,20 +8,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-// Alright what are the objects here
-// Algorithm input: Movies (name, length), Business Hours
-// -> Pulls out an object representing today's theater hours (start time, end time)
-// Theater object contains: BusinessHours, MovieList, Theather.generateSchedule(today) returns a DaySchedule containing multiple MovieSchedule objects
-// MovieSchedule object contains the Movie, a list of Times
-
 public class Main {
 
     public static void main(String[] args) {
         String inputFileName = takeInInputFileName();
         List<Movie> movies = readFileIntoMoviesList(inputFileName);
         BusinessHours theaterHours = readInBusinessHours();
-        Theater theater = new Theater(movies, theaterHours);
-        TheaterSchedule theaterSchedule = theater.generateTodaysSchedule(); // This is the algorithm
+        TheaterSchedule theaterSchedule = new TheaterSchedule(movies, theaterHours, currentDayOfWeek());
         printSchedule(theaterSchedule);
     }
 
@@ -51,6 +44,10 @@ public class Main {
         LocalDate localDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE M/d/yyyy");
         return localDate.format(formatter);
+    }
+
+    private static int currentDayOfWeek() {
+        return LocalDate.now().getDayOfWeek().getValue();
     }
 
     public static List<String> readInRows(String inputFileName, boolean includeFirstLine) {

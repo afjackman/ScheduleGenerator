@@ -9,14 +9,21 @@ import java.util.List;
  * Created by adamjackman on 6/30/17.
  */
 public class TheaterSchedule {
-
     List<MovieSchedule> movieSchedules;
+    static int SETUP_MINUTES = 60;
 
-    public TheaterSchedule(List<Movie> movieList, BusinessHours theaterHours, int dayOfWeek) {
+    public TheaterSchedule(List<Movie> movieList, BusinessHours businessHours, int dayOfWeek) {
+        SingleDayBusinessHours todaysHours = businessHours.getHours(dayOfWeek);
+
+        // windowStart and windowEnd are the minute values for the window in which movies can be scheduled
+        int windowStart = todaysHours.getStartHour() * 60 + todaysHours.getStartMin() + SETUP_MINUTES;
+        int windowEnd = todaysHours.getEndHour() * 60 + todaysHours.getEndMin();
+
+        // Populate the list of movie schedules
         movieSchedules = new ArrayList<>(movieList.size());
-        SingleDayBusinessHours todaysHours = theaterHours.getDailyHours(dayOfWeek);
         for (Movie movie : movieList) {
-            movieSchedules.add(new MovieSchedule(movie, todaysHours));
+            MovieSchedule movieSchedule = new MovieSchedule(movie, windowStart, windowEnd);
+            movieSchedules.add(movieSchedule);
         }
     }
 
@@ -28,7 +35,7 @@ public class TheaterSchedule {
             schedule.append(movie.toString());
             schedule.append("\n");
             schedule.append(movieSchedule.toString());
-            schedule.append("\n\n");
+            schedule.append("\n");
         }
         return schedule.toString();
     }

@@ -19,7 +19,7 @@ public class BusinessHours {
         businessHours[6] = new SingleDayBusinessHours(10, 30, 23, 30);
     }
 
-    public SingleDayBusinessHours getDailyHours(int dayOfWeek) {
+    public SingleDayBusinessHours getHours(int dayOfWeek) {
         return businessHours[dayOfWeek];
     }
 }
